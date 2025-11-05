@@ -6,8 +6,18 @@ import ProductGrid from "../components/ProductGrid";
 import SearchBar from "../components/SearchBar";
 import FilterBar from "../components/FilterBar";
 
+// Define a Product interface for type safety
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  thumbnail: string;
+}
+
 export default function Home() {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,14 +26,16 @@ export default function Home() {
 
   useEffect(() => {
     fetchProducts()
-      .then((data) => {
+      .then((data: Product[]) => {
         setProducts(data);
-        setCategories([...new Set(data.map((p: any) => p.category))]);
+        // Extract unique categories and set state
+        setCategories([...new Set(data.map((p) => p.category))]);
       })
       .catch(() => setError("Failed to fetch products"))
       .finally(() => setLoading(false));
   }, []);
 
+  // Filter products based on search term and selected category
   const filteredProducts = products.filter(
     (p) =>
       p.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -46,4 +58,3 @@ export default function Home() {
     </div>
   );
 }
-
