@@ -10,7 +10,7 @@ A fully responsive product filtering app built using Next.js 16, TypeScript, and
 •	Optimized for performance and responsiveness
 ---
 ## 💻 Demo
-- Live preview: 
+- Live preview: https://interactive-product-filter-git-main-monicas-projects-5c69e631.vercel.app
 ---
 ⚡ Tech Stack
 •	Next.js 16 (App Router)
